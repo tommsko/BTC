@@ -17,6 +17,13 @@ import java.util.logging.Logger;
 import javax.swing.JLabel;
 import dataManagment.BoardData;
 import dataManagment.DatabaseConnector;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import javax.swing.JOptionPane;
 
 /**
@@ -58,13 +65,15 @@ public class playerGUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        listAllPlayers = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         playerPID1 = new javax.swing.JTextField();
         playerPID2 = new javax.swing.JTextField();
         readPID1 = new javax.swing.JButton();
         readPID2 = new javax.swing.JButton();
         export = new javax.swing.JButton();
+        read = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         movementMenu = new javax.swing.JMenuItem();
@@ -97,7 +106,7 @@ public class playerGUI extends javax.swing.JFrame {
             }
         });
 
-        next.setText("Next");
+        next.setText("Save & Next");
         next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextActionPerformed(evt);
@@ -116,7 +125,12 @@ public class playerGUI extends javax.swing.JFrame {
 
         jLabel3.setText("1st player");
 
-        jButton1.setText("List");
+        listAllPlayers.setText("List");
+        listAllPlayers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listAllPlayersActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("2nd player");
 
@@ -139,6 +153,20 @@ public class playerGUI extends javax.swing.JFrame {
         readPID2.setText("PID");
 
         export.setText("Export player data to players.dat");
+        export.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportActionPerformed(evt);
+            }
+        });
+
+        read.setText("Read player data from players.dat");
+        read.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                readActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Read players from BM Server");
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Actions");
@@ -216,12 +244,6 @@ public class playerGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(553, 553, 553)
-                        .addComponent(jLabel4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -229,7 +251,7 @@ public class playerGUI extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(pairNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 529, Short.MAX_VALUE)
-                                .addComponent(jButton1))
+                                .addComponent(listAllPlayers))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -249,9 +271,21 @@ public class playerGUI extends javax.swing.JFrame {
                                                 .addComponent(playerPID2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(readPID2))
-                                            .addComponent(export))
+                                            .addComponent(export)
+                                            .addComponent(read))
                                         .addGap(79, 79, 79)
-                                        .addComponent(name2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(name2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(553, 553, 553)
+                                .addComponent(jLabel4))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel2)
+                                .addGap(69, 69, 69)
+                                .addComponent(jButton1)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(25, 25, 25))
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -261,12 +295,14 @@ public class playerGUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jButton1))
                 .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(pairNumber)
-                    .addComponent(jButton1))
+                    .addComponent(listAllPlayers))
                 .addGap(2, 2, 2)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -283,7 +319,9 @@ public class playerGUI extends javax.swing.JFrame {
                     .addComponent(readPID2))
                 .addGap(30, 30, 30)
                 .addComponent(next)
-                .addGap(51, 51, 51)
+                .addGap(15, 15, 15)
+                .addComponent(read)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(export)
                 .addGap(120, 120, 120)
                 .addComponent(jLabel4)
@@ -335,6 +373,100 @@ public class playerGUI extends javax.swing.JFrame {
     private void playerPID2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playerPID2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_playerPID2ActionPerformed
+
+    private void listAllPlayersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listAllPlayersActionPerformed
+        if(!BridgeTorunamentController.vm.ACPlayerManagerRunning.equals("true")) {
+        JOptionPane.showMessageDialog(null, "Critical error: Player manager is shut down, expect errors!");
+        return;
+        }
+        
+
+        
+        
+        
+        String allData = "";
+        for (int i = 1; i <= bridgetournamentcontroller.BridgeTorunamentController.ac.m.pairs; i++ ) {
+            String pairData =   "["+i+"]"+
+                                bridgetournamentcontroller.BridgeTorunamentController.ac.pm.players.get(i)[0]
+                                +" & "+
+                                bridgetournamentcontroller.BridgeTorunamentController.ac.pm.players.get(i)[1]
+                                +"\n";
+            allData+=pairData;
+        }
+        
+        JOptionPane.showMessageDialog(null, allData);
+    }//GEN-LAST:event_listAllPlayersActionPerformed
+
+    private void exportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportActionPerformed
+       PrintWriter writer;
+      try {
+          writer = new PrintWriter("tournaments/"+bridgetournamentcontroller.BridgeTorunamentController.vm.tournamentName+"/databases/"+"players.dat", "UTF-8");
+          
+          for (int i = 1; i <= bridgetournamentcontroller.BridgeTorunamentController.ac.m.pairs; i++ ) {
+            
+            if (i !=bridgetournamentcontroller.BridgeTorunamentController.ac.m.pairs)  {
+            String pairData =   i+" "+
+                                bridgetournamentcontroller.BridgeTorunamentController.ac.pm.players.get(i)[0].replaceAll("\\s+", "_")
+                                +" "+
+                                bridgetournamentcontroller.BridgeTorunamentController.ac.pm.players.get(i)[1].replaceAll("\\s+", "_");
+                                
+            writer.println(pairData);
+            }
+            else {
+            String pairData =   i+" "+
+                                bridgetournamentcontroller.BridgeTorunamentController.ac.pm.players.get(i)[0].replaceAll("\\s+", "_")
+                                +" "+
+                                bridgetournamentcontroller.BridgeTorunamentController.ac.pm.players.get(i)[1].replaceAll("\\s+", "_");
+                                
+            writer.println(pairData);
+            }
+          }
+          
+        writer.close();
+      } catch (FileNotFoundException ex) {
+          Logger.getLogger(playerGUI.class.getName()).log(Level.SEVERE, null, ex);
+      } catch (UnsupportedEncodingException ex) {
+          Logger.getLogger(playerGUI.class.getName()).log(Level.SEVERE, null, ex);
+      }
+
+    }//GEN-LAST:event_exportActionPerformed
+
+    private void readActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readActionPerformed
+       File f= new File("tournaments/"+bridgetournamentcontroller.BridgeTorunamentController.vm.tournamentName+"/databases/"+"players.dat");
+        
+       if(!f.exists()) {
+        JOptionPane.showMessageDialog(null, "Critical error: Player database file doesn't exist!");
+        return;
+        }
+        
+        BufferedReader br;
+        String line = null;
+        
+      try {
+          br = new BufferedReader(new FileReader(f));
+         
+          while ((line = br.readLine()) != null) {
+              int pairID = Integer.parseInt(line.split(" ")[0]);
+              
+              String player1 = line.split(" ")[1];
+              String player2 = line.split(" ")[2];
+              
+              String[] old = bridgetournamentcontroller.BridgeTorunamentController.ac.pm.players.get(pairID);
+              String[] change = new String[2]; change[0] = player1.replaceAll("_", " "); change[1] = player2.replaceAll("_", " ");
+                bridgetournamentcontroller.BridgeTorunamentController.ac.pm.players.replace(pairID, old, change);
+          }
+          
+          br.close();
+      } catch (IOException ex) {
+          Logger.getLogger(playerGUI.class.getName()).log(Level.SEVERE, null, ex);
+      }
+ 
+      // let list show first pair
+      activePairGUI= 0;
+        nextActionPerformed(null);
+      JOptionPane.showMessageDialog(null, "Database file read!");
+	
+    }//GEN-LAST:event_readActionPerformed
 
     /**
      * @param args the command line arguments
@@ -455,6 +587,7 @@ public class playerGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton listAllPlayers;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem movementMenu;
     private javax.swing.JTextField name1;
@@ -464,6 +597,7 @@ public class playerGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem pasteMenuItem;
     private javax.swing.JTextField playerPID1;
     private javax.swing.JTextField playerPID2;
+    private javax.swing.JButton read;
     private javax.swing.JButton readPID1;
     private javax.swing.JButton readPID2;
     private javax.swing.JMenuItem saveAsMenuItem;

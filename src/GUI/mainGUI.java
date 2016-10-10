@@ -52,6 +52,9 @@ artificialDatabaseGUI adg = new artificialDatabaseGUI();
 
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        tournamentName = new javax.swing.JLabel();
+        update = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         tournamentMenu = new javax.swing.JMenuItem();
@@ -86,6 +89,18 @@ artificialDatabaseGUI adg = new artificialDatabaseGUI();
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Active tournament:");
+
+        tournamentName.setFont(new java.awt.Font("Cantarell", 1, 15)); // NOI18N
+        tournamentName.setText("Tournament not opened!");
+
+        update.setText("Update");
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
 
         fileMenu.setMnemonic('f');
         fileMenu.setText("Actions");
@@ -236,15 +251,32 @@ artificialDatabaseGUI adg = new artificialDatabaseGUI();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(553, 553, 553)
                 .addComponent(jLabel4)
                 .addGap(71, 173, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tournamentName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(update)
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(568, 568, 568)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(tournamentName)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(update)))
+                .addGap(508, 508, 508)
                 .addComponent(jLabel4)
                 .addContainerGap(268, Short.MAX_VALUE))
         );
@@ -302,6 +334,13 @@ artificialDatabaseGUI adg = new artificialDatabaseGUI();
         adg.setVisible(true);
     }//GEN-LAST:event_artificialDatabaseMenuActionPerformed
 
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+        // update tournament name field
+        if(!bridgetournamentcontroller.BridgeTorunamentController.vm.tournamentName.equals("")) {
+        tournamentName.setText(bridgetournamentcontroller.BridgeTorunamentController.vm.tournamentName);
+        }
+    }//GEN-LAST:event_updateActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -355,6 +394,7 @@ artificialDatabaseGUI adg = new artificialDatabaseGUI();
     private javax.swing.JMenuItem externalMenu;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuBar menuBar;
@@ -364,6 +404,8 @@ artificialDatabaseGUI adg = new artificialDatabaseGUI();
     private javax.swing.JMenuItem resultMenu;
     private javax.swing.JMenuItem scoreMenu;
     private javax.swing.JMenuItem tournamentMenu;
+    private javax.swing.JLabel tournamentName;
+    private javax.swing.JButton update;
     private javax.swing.JMenuItem watchdogMenu;
     // End of variables declaration//GEN-END:variables
 

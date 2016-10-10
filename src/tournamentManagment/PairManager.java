@@ -15,6 +15,8 @@ public class PairManager {
    public HashMap<Integer, String[]> players = new HashMap<Integer, String[]>();
    public HashMap<Integer, Double> score = new HashMap<Integer, Double>();
    
+   
+   // empty database
    public void start() {
        String[] empty = new String[2]; empty[0] = ""; empty[1] = "";
        
@@ -23,10 +25,16 @@ public class PairManager {
    players.put(i, empty );
    }
    
+   
+   
    for(int i = 1; i <= bridgetournamentcontroller.BridgeTorunamentController.ac.m.pairs; i++) {
    score.put(i, 0.0 );
    }
+   
+   
    }
+   
+  
    
    public void printScore() {
     for (Integer name: score.keySet()){

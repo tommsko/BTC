@@ -63,7 +63,7 @@ BMImputCreator dm = new BMImputCreator();
         startMinute = new javax.swing.JTextField();
         startSecond = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        endTimeLabel = new javax.swing.JLabel();
+        playTime = new javax.swing.JLabel();
         reopenBM = new javax.swing.JButton();
         updatebutton = new javax.swing.JButton();
         menuBar = new javax.swing.JMenuBar();
@@ -135,14 +135,19 @@ BMImputCreator dm = new BMImputCreator();
         jLabel5.setText("Start time");
 
         startHour.setText("H");
+        startHour.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startHourActionPerformed(evt);
+            }
+        });
 
         startMinute.setText("M");
 
         startSecond.setText("S");
 
-        jLabel6.setText("End time");
+        jLabel6.setText("Play time");
 
-        endTimeLabel.setText("to be calculated");
+        playTime.setText("to be calculated");
 
         reopenBM.setText("Reopen BMImput");
         reopenBM.addActionListener(new java.awt.event.ActionListener() {
@@ -245,18 +250,9 @@ BMImputCreator dm = new BMImputCreator();
                                 .addComponent(movementInUseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(movementName, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGap(22, 22, 22)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(startHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(startMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(startSecond, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(endTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(playTime, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(useButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -277,6 +273,19 @@ BMImputCreator dm = new BMImputCreator();
                                         .addGap(12, 12, 12)
                                         .addComponent(bmproaddress, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGap(159, 159, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(288, 288, 288))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(startHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(startMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(startSecond, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(243, 243, 243))))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(10, 10, 10)
@@ -289,30 +298,32 @@ BMImputCreator dm = new BMImputCreator();
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(movementName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(useButton)
-                    .addComponent(createBM)
-                    .addComponent(reopenBM)
-                    .addComponent(updatebutton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(movementName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(useButton)
+                            .addComponent(createBM)
+                            .addComponent(reopenBM)
+                            .addComponent(updatebutton))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(movementInUseLabel)
+                            .addComponent(restartBM))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bmproaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(playTime)))
+                .addGap(174, 174, 174)
+                .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(movementInUseLabel)
-                    .addComponent(restartBM))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bmproaddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
                     .addComponent(startHour, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(startMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(startSecond, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(endTimeLabel))
-                .addGap(333, 333, 333)
+                .addGap(206, 206, 206)
                 .addComponent(jLabel4)
                 .addContainerGap(92, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,6 +364,7 @@ BMImputCreator dm = new BMImputCreator();
     } catch (IOException ex) {
         Logger.getLogger(movementGUI.class.getName()).log(Level.SEVERE, null, ex);
     }
+        updateTimeManager();
     }//GEN-LAST:event_useButtonActionPerformed
 
     private void createBMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createBMActionPerformed
@@ -422,12 +434,32 @@ BMImputCreator dm = new BMImputCreator();
     }       catch (IOException ex) {
                 Logger.getLogger(movementGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
+        updateTimeManager();
         JOptionPane.showMessageDialog(null, "Updated");
     }//GEN-LAST:event_updatebuttonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void startHourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startHourActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_startHourActionPerformed
+
+    
+    public void updateTimeManager() {
+        // check for weird movement - board 1 no expected results
+        if(m.expectedBoardResults[1] == 0) {
+        JOptionPane.showMessageDialog(null, "Error in movement (timeManager) - board 1 has 0 expected results.");
+        return;
+        }
+        
+    int rounds = m.rounds;
+    int boardsPerRound = m.expectedBoardResults[1];
+    
+    int playTime = boardsPerRound * bridgetournamentcontroller.BridgeTorunamentController.vm.minutesPerBoard * rounds;
+    if((double)playTime/60 < 1) this.playTime.setText(playTime + " minutes");
+    else this.playTime.setText((double) playTime/60 + " hours");
+    
+    }
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -475,7 +507,6 @@ BMImputCreator dm = new BMImputCreator();
     private javax.swing.JMenuItem cutMenuItem;
     private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JMenu editMenu;
-    private javax.swing.JLabel endTimeLabel;
     private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JMenu fileMenu;
     private javax.swing.JMenu helpMenu;
@@ -491,6 +522,7 @@ BMImputCreator dm = new BMImputCreator();
     private javax.swing.JMenuItem movementMenu;
     private javax.swing.JTextField movementName;
     private javax.swing.JMenuItem pasteMenuItem;
+    private javax.swing.JLabel playTime;
     private javax.swing.JButton reopenBM;
     private javax.swing.JButton restartBM;
     private javax.swing.JMenuItem saveAsMenuItem;

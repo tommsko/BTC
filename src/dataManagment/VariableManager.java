@@ -22,4 +22,13 @@ public class VariableManager {
     public String ACPlayerManagerRunning = "";
     
     
+    
+    
+    
+    
+    // constants
+    
+    public int minutesPerBoard = 8;
+    
+    
 }

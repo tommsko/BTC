@@ -24,9 +24,10 @@ public class Movement {
     public int pairs = 0;
     public int MISSING = 0;
     
-    
-    public int HIGHESTBOARD;
-    public int[] expectedBoardResults;
+    // to be gathered from movement
+    public int HIGHESTBOARD; // highest board to score
+    public int[] expectedBoardResults; // expected results for board
+    public int rounds = 0; // rounds from movement
     
     public ArrayList<Integer[]> roundData = new ArrayList<Integer[]>();
     
@@ -58,6 +59,7 @@ public class Movement {
 
 
 if(data[6] > HIGHESTBOARD) HIGHESTBOARD = data[6];
+if(data[1] > rounds) rounds = data[1];
        
        }
     }
