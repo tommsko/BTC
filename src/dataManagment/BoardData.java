@@ -5,6 +5,8 @@
  */
 package dataManagment;
 
+import java.sql.Time;
+
 /**
  *
  * @author tomas
@@ -27,6 +29,8 @@ public class BoardData {
     
     public int pairNS =0;
     public int pairEW =0;
+    
+    public Time timePlayed = null;
     
     
     public BoardData(int ID, int boardID, String contractType, int contractSize, String contractLine,char contractDeclarer, int contractResult, String leadType, String leadCard, int table, int round, int NS, int EW, int multiplier) {
