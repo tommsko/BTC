@@ -14,6 +14,7 @@ public class BoardData {
     public int boardID = 0;
     public String contractType = "";
     public int contractSize = 0;
+    public int contractMultiplier = 0;
     public String contractLine = "";
     public char contractDeclarer = '-';
     public int contractResult = 0;
@@ -23,11 +24,12 @@ public class BoardData {
     public int table = 0;
     public int round = 0;
     
-    public BoardData(int ID, int boardID, String contractType, int contractSize, String contractLine,char contractDeclarer, int contractResult, String leadType, String leadCard, int table, int round) {
+    public BoardData(int ID, int boardID, String contractType, int contractSize, String contractLine,char contractDeclarer, int contractResult, String leadType, String leadCard, int table, int round, int multiplier) {
     this.ID = ID;
     this.boardID = boardID;
     this.contractType = contractType;
     this.contractSize = contractSize;
+    this.contractMultiplier = multiplier;
     this.contractLine = contractLine;
     this.contractResult = contractResult;
     this.leadType = leadType;

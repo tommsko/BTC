@@ -56,7 +56,7 @@ public class MPScore {
             else
              contract = bd.get(i).contractSize+ bd.get(i).contractType+ bd.get(i).contractDeclarer+""+bd.get(i).contractResult;
            contract.replaceAll("0", "=");
-            int score = cs.scoreNS(contract, VULNS, VULEW, 1);
+            int score = cs.scoreNS(contract, VULNS, VULEW, bd.get(i).contractMultiplier);
             
             if(bd.get(i).contractLine == "NS"){MP_NS.add(score); MP_EW.add(score*-1);}
             if(bd.get(i).contractLine == "EW"){MP_NS.add(score*-1); MP_EW.add(score);}
@@ -122,7 +122,7 @@ Integer[] scoreEW = MP_EW.toArray(new Integer[MP_EW.size()]); Arrays.sort(scoreE
             else
              contract = bd.get(i).contractSize+ bd.get(i).contractType+ bd.get(i).contractDeclarer+""+bd.get(i).contractResult;
            contract.replaceAll("0", "=");
-            int score = cs.scoreNS(contract, VULNS, VULEW, 1);
+            int score = cs.scoreNS(contract, VULNS, VULEW, bd.get(i).contractMultiplier);
             String dec = bd.get(i).contractLine;
             
             if(dec=="NS") {

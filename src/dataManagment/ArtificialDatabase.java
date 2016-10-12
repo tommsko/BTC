@@ -102,6 +102,15 @@ if(rs.next()) {
      int boardID = Integer.parseInt(rs.getString(5));
      String contractType = rs.getString(10).split(" ")[1];
      int contractSize = Integer.parseInt(rs.getString(10).split(" ")[0]);
+     int multiplier = 1;
+     
+     // exists double/redouble
+     if(rs.getString(10).split(" ").length >= 3) {
+     if(rs.getString(10).split(" ")[2].equals("x")) multiplier=2;
+     if(rs.getString(10).split(" ")[2].equals("xx")) multiplier=4;
+     }
+     
+     
      String contractLine = ""; if(rs.getString(9).charAt(0) == 'N' || rs.getString(9).charAt(0) == 'S') contractLine="NS"; else contractLine="EW";
      char contractDeclarer = rs.getString(9).charAt(0);
      int contractResult = Integer.parseInt(rs.getString(11).replace("=", "0"));
@@ -116,7 +125,7 @@ String leadType = "0"; String leadCard = "0";
      int EW = Integer.parseInt(rs.getString(7));
      
      if(!DELETED) {
-BoardData bd = new BoardData(ID, boardID, contractType, contractSize, contractLine, contractDeclarer, contractResult, leadType, leadCard,table,round,NS,EW);
+BoardData bd = new BoardData(ID, boardID, contractType, contractSize, contractLine, contractDeclarer, contractResult, leadType, leadCard,table,round,NS,EW, multiplier);
 ArrayList<BoardData> bda = bdata.get(boardID);
 if(bda ==null) bda=new ArrayList<BoardData>();
 bda.add(bd);
@@ -125,8 +134,8 @@ bdata.put(boardID, bda);
      rs.close();
      s.close();
      
-System.out.println("Result Nb. "+ID+" on board "+boardID+" contract "+contractType+" of size"+contractSize+"|"+contractLine+"|"+contractDeclarer+""
-       + " with result "+contractResult+" and lead "+leadType+"."+leadCard+" with DEL "+DELETED); results++; 
+System.out.println("Result Nb. "+ID+" on board "+boardID+" contract "+contractType+" of size"+contractSize+" | "+contractLine+" | "+contractDeclarer+""
+       + " with result "+contractResult+" multiplier "+multiplier+" and lead "+leadType+"."+leadCard+" with DEL "+DELETED); results++; 
 } else break;
     }
     

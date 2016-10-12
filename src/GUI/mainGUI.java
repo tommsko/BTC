@@ -37,7 +37,9 @@ artificialDatabaseGUI adg = new artificialDatabaseGUI();
         initComponents();
         this.dc = bridgetournamentcontroller.BridgeTorunamentController.dc;
         
-        
+        // open choose tournament immediately
+         tg.setVisible(true);
+         tg.setAlwaysOnTop(true);
         
     }
 
